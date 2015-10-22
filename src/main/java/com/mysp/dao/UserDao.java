@@ -20,7 +20,7 @@ public class UserDao {
    //     sqlSession.insert("RoleConfigMapper.addRoleConfig", roleConfig);
    // }
 
-    public List<User> selectUser(int id) {
-        return sqlSession.selectList("UserMapper.getUser", id);
+    public List<User> selectUser() {
+        return sqlSession.selectList("UserMapper.getUser");
     }
 }

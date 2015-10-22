@@ -5,15 +5,15 @@ package com.mysp.model;
  */
 public class User {
 
-    private Integer id;
+    private int id;
     private String userName;
     private String userPassword;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -23,6 +23,15 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                '}';
     }
 
     public String getUserPassword() {
