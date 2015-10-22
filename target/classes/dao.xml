@@ -6,33 +6,12 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-lazy-init="true">
-
-    <bean
-            class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <value>classpath:jdbc.properties</value>
-        </property>
+    <bean id="dataSource" class="qunar.tc.qclient.db.jdbc.client.support.QDBGroupDataSource">
+        <!-- dbKey 代表一个数据库, 使用数据库名, 需要和 qdb 文件中的前缀对上 -->
+        <constructor-arg name="dbGroupKey" value="qcsp"/>
+        <!-- datasource 类型, 支持 pxc 和 mmm -->
+        <constructor-arg name="dataSourceType" value="PxcDataSource"/>
     </bean>
-
-    <!-- ========================= DBCP数据源 ========================== -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${jdbc.driverClassName}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-        <property name="initialSize" value="20" />
-        <property name="maxActive" value="100" />
-        <property name="maxIdle" value="200" />
-        <property name="minIdle" value="20" />
-        <!-- 处理mysql 8小时自动断开连接的问题 -->
-        <property name="testWhileIdle" value="true" />
-        <property name="testOnBorrow" value="false" />
-        <property name="testOnReturn" value="false" />
-        <property name="validationQuery" value="select 1" />
-        <property name="timeBetweenEvictionRunsMillis" value="20000" />
-        <property name="numTestsPerEvictionRun" value="100" />
-    </bean>
-
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -61,7 +40,7 @@
     <!-- 自动Dao装配 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="annotationClass" value="org.springframework.stereotype.Repository"/>
-        <property name="basePackage" value="com.mysp.dao"/>
+        <property name="basePackage" value="com.qunar.qcsp.dao.qcsp"/>
         <property name="sqlSessionTemplateBeanName" value="sqlSession"/>
     </bean>
 </beans>

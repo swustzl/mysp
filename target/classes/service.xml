@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema:beans xmlns:schema="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"
+
+       default-autowire="byName">
+
+    <context:component-scan base-package="com.qunar.qcsp.service"/>
+
+    <!--redis服务-->
+    <schema:bean id="redisStringService" class="com.qunar.sei.common.service.redis.RedisStringService">
+        <schema:property name="sedis" ref="sedis"/>
+    </schema:bean>
+
+    <schema:bean id="redisBaseService" class="com.qunar.sei.common.service.redis.RedisBaseService">
+        <schema:property name="sedis" ref="sedis"/>
+    </schema:bean>
+
+    <!-- 启动缓存注解功能 -->
+    <cache:annotation-driven/>
+
+    <!--generic cache manager -->
+    <schema:bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <schema:property name="caches">
+            <schema:set>
+                <schema:bean class="com.qunar.qcsp.service.cache.UserTaskDispatchInfoCache" p:name="userTaskDispatchInfoCache"/>
+                <schema:bean class="com.qunar.qcsp.service.cache.UserInfoCache" p:name="userInfoCache"/>
+                <schema:bean class="com.qunar.qcsp.service.cache.UserStockCache" p:name="userStockCache"/>
+                <schema:bean class="com.qunar.qcsp.service.cache.TaskAddCache" p:name="taskAddCache"/>
+            </schema:set>
+        </schema:property>
+    </schema:bean>
+
+    <!--加解密服务-->
+    <schema:bean id="infoEncryptClient" class="com.qunar.tc.core.info.client.encrypt.InfoEncryptClientImpl">
+        <schema:constructor-arg value="${tc.encrypt.Environment}"/>
+    </schema:bean>
+
+    <schema:bean id="infoDecryptClient" class="com.qunar.tc.core.info.client.decrypt.InfoDecryptClientImpl">
+        <schema:constructor-arg value="${tc.encrypt.Environment}"/>
+    </schema:bean>
+
+</schema:beans>
