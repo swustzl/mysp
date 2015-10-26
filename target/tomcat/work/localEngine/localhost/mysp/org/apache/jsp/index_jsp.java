@@ -61,7 +61,7 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<body>\r\n");
       out.write("<h2>Hello World!</h2>\r\n");
       out.write("\r\n");
-      out.write("<form action=\"login\">\r\n");
+      out.write("<form action=\"user/findAllUser\">\r\n");
       out.write("    用户名：<input id=\"username\" name=\"username\" type=\"text\"></input><br>\r\n");
       out.write("    密  码：<input id=\"username\" name=\"password\" type=\"password\"></input><br>\r\n");
       out.write("    <input type=\"submit\">\r\n");

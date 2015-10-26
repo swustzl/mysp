@@ -25,15 +25,6 @@ public class User {
         this.userName = userName;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                '}';
-    }
-
     public String getUserPassword() {
         return userPassword;
     }
@@ -42,7 +33,13 @@ public class User {
         this.userPassword = userPassword;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                '}';
+    }
 
 }

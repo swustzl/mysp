@@ -10,7 +10,7 @@
 <body>
 <h2>Hello World!</h2>
 
-<form action="login">
+<form action="user/findAllUser">
     用户名：<input id="username" name="username" type="text"></input><br>
     密  码：<input id="username" name="password" type="password"></input><br>
     <input type="submit">
